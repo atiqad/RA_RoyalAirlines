@@ -1,0 +1,73 @@
+﻿@model IEnumerable<RoyalAirlines.Models.Flight>
+@{
+    ViewBag.Title = "Flights";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<header id="gtco-header" class="gtco-cover gtco-cover-sm" role="banner" style="background-image: url(../../images/img_bg_1.jpg)">
+    <div class="overlay"></div>
+    <div class="gtco-container">
+        <div class="row">
+            <div class="col-md-12 col-md-offset-0 text-center">
+                <div class="row row-mt-15em">
+
+                    <div class="col-md-12 mt-text " data-animate-effect="fadeInUp">
+                        <h1>Flights Schedule</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="gtco-section border-bottom">
+    <div class="gtco-container">
+        <div class="row">
+            <div class="col-md-12 text-center ">
+                @if (!Model.Any())
+                {
+                    <p>We don't have any flights yet.</p>
+                }
+
+                @Html.ActionLink("New Flight", "New", "Flights", new { @class = "btn btn-primary" })
+
+                <table id="tblListFlights" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Flight Code</th>
+                            <th>From</th>
+                            <th>To</th>
+                            <th>Time</th>
+                            <th>Vacant Seats</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var flight in Model)
+                        {
+                            <tr>
+                                <td>@Html.ActionLink(flight.Code, "Edit", "Flights", new { id = flight.Id }, null)</td>
+                                <td>@flight.Origin</td>
+                                <td>@flight.Destination</td>
+                                <td>@flight.Time</td>
+                                <td>@flight.seatsEmpty</td>
+                                <td>@Html.ActionLink("Delete", "Delete", "Flights", new { id = flight.Id }, new { @class = "btn btn-danger" })</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>
+
+@section scripts 
+    {
+    <script>
+        $(document).ready(function(){
+            $("#tblListFlights").DataTable();
+        });
+            
+    </script>
+    }

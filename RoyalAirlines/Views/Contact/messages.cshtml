@@ -1,0 +1,70 @@
+﻿@model IEnumerable<RoyalAirlines.Models.Contact>
+@{
+    ViewBag.Title = "Messages";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<header id="gtco-header" class="gtco-cover gtco-cover-sm" role="banner" style="background-image: url(../../images/img_bg_1.jpg)">
+    <div class="overlay"></div>
+    <div class="gtco-container">
+        <div class="row">
+            <div class="col-md-12 col-md-offset-0 text-center">
+                <div class="row row-mt-15em">
+
+                    <div class="col-md-12 mt-text " data-animate-effect="fadeInUp">
+                        <h1>Messages</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="gtco-section border-bottom">
+    <div class="gtco-container">
+        <div class="row">
+            <div class="col-md-12 text-center ">
+                @if (!Model.Any())
+                {
+                    <p>We don't have any messages yet.</p>
+                }
+
+
+                <table id="tblListMessages" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>From</th>
+                            <th>Sender Email</th>
+                            <th>Subject</th>
+                            <th>Vacant Seats</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var message in Model)
+                        {
+                            <tr>
+                                <td>@message.Name</td>
+                                <td>@message.Email</td>
+                                <td>@message.Subject</td>
+                                <td>@message.Message</td>
+                                <td>@Html.ActionLink("Delete", "Delete", "Contact", new { id = message.Id }, new { @class = "btn btn-danger" })</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>
+
+@section scripts 
+    {
+    <script>
+        $(document).ready(function(){
+            $("#tblListMessages").DataTable();
+        });
+            
+    </script>
+    }

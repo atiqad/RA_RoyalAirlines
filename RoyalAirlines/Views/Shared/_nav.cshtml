@@ -1,0 +1,41 @@
+﻿<nav class="gtco-nav" role="navigation">
+    <div class="gtco-container">
+        <div class="row">
+            <div class="col-sm-4 col-xs-12">
+                <div id="gtco-logo">
+                    @if (User.IsInRole("Admin"))
+                    {
+                        @Html.ActionLink("Royal Airlines", "Index", "Home")<em>Admin</em>
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Royal Airlines", "Index", "Home")
+                    }
+
+                </div>
+            </div>
+            @if (Request.IsAuthenticated)
+            {
+                <div class="col-xs-6 text-right menu-1" style="padding-right: 0;">
+                    <ul>
+                        <li>@Html.ActionLink("Flights", "Index", "Flights")</li>
+                        <li>@Html.ActionLink("Locations", "Locations", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Index", "Contact")</li>
+                    </ul>
+                </div>
+            }
+            else
+            {
+                <div class="col-xs-6 text-right menu-1" style="padding-right: 0;">
+                    <ul>
+                        <li>@Html.ActionLink("Flights", "Index", "Flights")</li>
+                        <li>@Html.ActionLink("Locations", "Locations", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Index", "Contact")</li>
+                    </ul>
+                </div>
+            }
+
+            @Html.Partial("_LoginPartial")
+        </div>
+    </div>
+</nav>

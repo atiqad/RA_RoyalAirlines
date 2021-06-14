@@ -1,0 +1,71 @@
+﻿@model IEnumerable<RoyalAirlines.Models.Booking>
+@{
+    ViewBag.Title = "Bookings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<header id="gtco-header" class="gtco-cover gtco-cover-sm" role="banner" style="background-image: url(../../images/img_bg_1.jpg)">
+    <div class="overlay"></div>
+    <div class="gtco-container">
+        <div class="row">
+            <div class="col-md-12 col-md-offset-0 text-center">
+                <div class="row row-mt-15em">
+
+                    <div class="col-md-12 mt-text " data-animate-effect="fadeInUp">
+                        <h1>Bookings</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="gtco-section border-bottom">
+    <div class="gtco-container">
+        <div class="row">
+            <div class="col-md-12 text-center ">
+                @if (!Model.Any())
+                {
+                    <p>We don't have any bookings yet.</p>
+                }
+
+                <table id="tblListBookings" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Flight Code</th>
+                            <th>From</th>
+                            <th>To</th>
+                            <th>Time</th>
+                            <th>User</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var booking in Model)
+                        {
+                            <tr>
+                                <td>@booking.Flight.Code</td>
+                                <td>@booking.Flight.Origin</td>
+                                <td>@booking.Flight.Destination</td>
+                                <td>@booking.Flight.Time</td>
+                                <!--
+                                    <td>@**booking.Users.Name*@</td>
+                                    -->
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>
+
+@section scripts 
+    {
+    <script>
+        $(document).ready(function(){
+            $("#tblListBookings").DataTable();
+        });
+            
+    </script>
+    }
